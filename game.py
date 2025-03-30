@@ -6,8 +6,8 @@ from player import Player
 
 class Game:
     def __init__(self):
+        self.graphics = Graphics()
         self.player = Player()
-        self.graphics = Graphics(self.player)
 
     def start(self):
         clock = pygame.time.Clock()
@@ -20,4 +20,6 @@ class Game:
         
             self.player.update(dt)
 
-            self.graphics.render()
+            self.graphics.clear()
+            self.player.draw(self.graphics)
+            self.graphics.flip()

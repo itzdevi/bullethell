@@ -1,15 +1,21 @@
 import math
 import pygame
 
-from constants import MOVE_SPEED
+from obj import Obj
 
-class Player:
+MOVE_SPEED = 300
+SIZE = 50, 50
+COLOR = 0, 0, 255
+
+class Player(Obj):
     def __init__(self):
-        self.x = 0
-        self.y = 0
+        super().__init__()
 
     def update(self, dt):
         self.handle_move(dt)
+
+    def draw(self, graphics):
+        graphics.draw_rect(COLOR, self.get_position(), SIZE)
 
     def handle_move(self, dt):
         keys = pygame.key.get_pressed()
@@ -28,7 +34,3 @@ class Player:
             mag = math.sqrt(sq)
             self.x += input_vec[0] / mag * MOVE_SPEED * dt
             self.y += input_vec[1] / mag * MOVE_SPEED * dt
-
-
-    def get_position(self):
-        return self.x, self.y
