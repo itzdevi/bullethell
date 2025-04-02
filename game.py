@@ -1,13 +1,19 @@
 import pygame
 from constants import *
+from droplet import Droplet
+from enemy import Enemy
 from graphics import Graphics
 from player import Player
+from rain_generator import RainGenerator
 
 
 class Game:
     def __init__(self):
         self.graphics = Graphics()
         self.player = Player()
+        self.enemies: list[Enemy] = []
+
+        self.enemies.append(RainGenerator(0.03))
 
     def start(self):
         clock = pygame.time.Clock()
@@ -20,6 +26,13 @@ class Game:
         
             self.player.update(dt)
 
+            for enemy in self.enemies:
+                enemy.update(dt)
+
             self.graphics.clear()
+
             self.player.draw(self.graphics)
+            for enemy in self.enemies:
+                enemy.draw(self.graphics)
+            
             self.graphics.flip()

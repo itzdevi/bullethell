@@ -10,12 +10,12 @@ COLOR = 0, 0, 255
 class Player(Obj):
     def __init__(self):
         super().__init__()
+        self.set_position((0, 0))
+        self.set_size(SIZE)
+        self.set_color(COLOR)
 
     def update(self, dt):
         self.handle_move(dt)
-
-    def draw(self, graphics):
-        graphics.draw_rect(COLOR, self.get_position(), SIZE)
 
     def handle_move(self, dt):
         keys = pygame.key.get_pressed()
@@ -34,3 +34,6 @@ class Player(Obj):
             mag = math.sqrt(sq)
             self.x += input_vec[0] / mag * MOVE_SPEED * dt
             self.y += input_vec[1] / mag * MOVE_SPEED * dt
+
+        self.x = max(-375, min(375, self.x))
+        self.y = max(-375, min(375, self.y))
