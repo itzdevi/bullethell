@@ -1,22 +1,20 @@
 import pygame
 from constants import *
-from enemy import Enemy
 from graphics import Graphics
 from player import Player
-from rain_generator import RainGenerator
+from spawner import Spawner
 
 
 class Game:
     def __init__(self):
         self.graphics = Graphics()
         self.player = Player()
-        self.enemies: list[Enemy] = []
-
-        self.enemies.append(RainGenerator(0.03))
+        self.spawner = Spawner()
 
     def start(self):
         clock = pygame.time.Clock()
         should_run = True
+        self.spawner.spawn_horizontal(5)
         while should_run:
             dt = clock.tick(FRAMERATE) / 1000
             for event in pygame.event.get():
@@ -24,14 +22,9 @@ class Game:
                     should_run = False
         
             self.player.update(dt)
-
-            for enemy in self.enemies:
-                enemy.update(dt)
+            self.spawner.update(dt)
 
             self.graphics.clear()
-
             self.player.draw(self.graphics)
-            for enemy in self.enemies:
-                enemy.draw(self.graphics)
-            
+            self.spawner.draw(self.graphics)
             self.graphics.flip()

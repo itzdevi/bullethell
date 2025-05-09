@@ -1,4 +1,4 @@
-from droplet import Droplet
+from enemies.droplet import Droplet
 from enemy import Enemy
 import random
 
@@ -19,8 +19,6 @@ class RainGenerator(Enemy):
         for droplet in self.droplets:
             droplet.update(dt)
         self.droplets = [droplet for droplet in self.droplets if droplet.y < 450]
-
-        print(len(self.droplets))
 
     def draw(self, graphics):
         for droplet in self.droplets:

@@ -20,5 +20,5 @@ class Graphics:
         pygame.draw.rect(self.surface, color, rect)
 
     def world_to_screen_pos(self, position, size):
-        return position[0] + RESOLUTION[0] / 2 - size[0] / 2, position[1] + RESOLUTION[1] / 2 - size[0] / 2
+        return position[0] + RESOLUTION[0] / 2 - size[0] / 2, position[1] + RESOLUTION[1] / 2 - size[1] / 2
         
