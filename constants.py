@@ -1,3 +1,3 @@
 TITLE = "bullethell"
-FRAMERATE = 60
+FRAMERATE = 120
 RESOLUTION = (600, 600)

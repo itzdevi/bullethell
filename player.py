@@ -1,6 +1,7 @@
 import math
 import pygame
 
+from constants import RESOLUTION
 from obj import Obj
 
 MOVE_SPEED = 300
@@ -35,5 +36,7 @@ class Player(Obj):
             self.x += input_vec[0] / mag * MOVE_SPEED * dt
             self.y += input_vec[1] / mag * MOVE_SPEED * dt
 
-        self.x = max(-375, min(375, self.x))
-        self.y = max(-375, min(375, self.y))
+        max_x = RESOLUTION[0] / 2 - SIZE[0] / 2
+        max_y = RESOLUTION[1] / 2 - SIZE[1] / 2
+        self.x = max(-max_x, min(max_x, self.x))
+        self.y = max(-max_y, min(max_y, self.y))

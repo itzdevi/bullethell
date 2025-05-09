@@ -14,7 +14,7 @@ class Game:
     def start(self):
         clock = pygame.time.Clock()
         should_run = True
-        self.spawner.spawn_horizontal(5)
+        self.spawner.spawn_vertical(0.4, 1)
         while should_run:
             dt = clock.tick(FRAMERATE) / 1000
             for event in pygame.event.get():

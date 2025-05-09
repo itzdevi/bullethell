@@ -1,6 +1,5 @@
-from enemies.horizontal import Horizontal
 from obj import Obj
-from enemies.rain_generator import RainGenerator
+from enemies.horizontal import Horizontal
 from enemies.vertical import Vertical
 
 
@@ -11,20 +10,22 @@ class Spawner(Obj):
         self.set_position((0, 0))
         self.enemies = []
 
-    def spawn_rain(self, frequency: float, duration: float):
-        self.enemies.append([RainGenerator(frequency), duration])
+    def spawn_horizontal(self, warning_duration: float, duration: float):
+        self.enemies.append([Horizontal(True), warning_duration, duration])
 
-    def spawn_horizontal(self, duration: float):
-        self.enemies.append([Horizontal(), duration])
-
-    def spawn_vertical(self, duration: float):
-        self.enemies.append([Vertical(), duration])
+    def spawn_vertical(self, warning_duration: float, duration: float):
+        self.enemies.append([Vertical(True), warning_duration, duration])
 
     def update(self, dt):
         for enemy in self.enemies:
             enemy[0].update(dt)
-            enemy[1] -= dt
-            if enemy[1] <= 0:
+            if enemy[0].is_warning() and enemy[1] > 0:
+                enemy[1] -= dt
+                if enemy[1] <= 0:
+                    enemy[0].set_warning(False)
+            else:
+                enemy[2] -= dt
+            if enemy[2] <= 0:
                 self.enemies.remove(enemy)
 
     def draw(self, graphics):
