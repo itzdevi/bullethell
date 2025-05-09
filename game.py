@@ -1,6 +1,5 @@
 import pygame
 from constants import *
-from droplet import Droplet
 from enemy import Enemy
 from graphics import Graphics
 from player import Player
