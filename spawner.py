@@ -1,3 +1,4 @@
+from enemy import Enemy
 from obj import Obj
 from enemies.horizontal import Horizontal
 from enemies.vertical import Vertical
@@ -9,6 +10,9 @@ class Spawner(Obj):
         self.set_size((0, 0))
         self.set_position((0, 0))
         self.enemies = []
+
+    def get_lst(self) -> list[Enemy]:
+        return [x[0] for x in self.enemies]
 
     def spawn_horizontal(self, warning_duration: float, duration: float):
         self.enemies.append([Horizontal(True), warning_duration, duration])

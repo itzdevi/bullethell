@@ -1,5 +1,6 @@
 from graphics import Graphics
 
+import pygame
 
 class Obj:
     def __init__(self):
@@ -28,7 +29,7 @@ class Obj:
         return self.color
     
     def get_rect(self):
-        return self.x, self.y, self.width, self.height
+        return pygame.Rect(self.x, self.y, self.width, self.height)
     
     def draw(self, graphics: Graphics):
         graphics.draw_rect(self.color, self.get_position(), self.get_size())

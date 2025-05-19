@@ -23,8 +23,18 @@ class Game:
         
             self.player.update(dt)
             self.spawner.update(dt)
+            self.apply_collisions()
 
             self.graphics.clear()
             self.player.draw(self.graphics)
             self.spawner.draw(self.graphics)
             self.graphics.flip()
+
+    def apply_collisions(self):
+        for enemy in self.spawner.get_lst():
+            if self.aabb(self.player.get_rect(), enemy.get_rect()):
+                if not enemy.is_warning():
+                    print("damage!")
+
+    def aabb(self, rect1: pygame.Rect, rect2: pygame.Rect) -> bool:
+        return rect1.colliderect(rect2)
