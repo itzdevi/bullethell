@@ -1,14 +1,15 @@
-from pygame import Rect
 from constants import RESOLUTION
+from enemies.rect import Rect
 from enemy import Enemy
 
 from math import sin, cos, radians
 
 class Bullet(Rect):
     def __init__(self, position: tuple[float, float], size: float, speed: float, direction: float):
-        super().__init__(position, size, 0)
+        super().__init__(position, (size, size), 0)
         self.speed = speed
         self.direction = direction
+        self.size = size
 
     def should_destroy(self):
         return abs(self.x) > RESOLUTION[0] + self.size or abs(self.y) > RESOLUTION[0] + self.size

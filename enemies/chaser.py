@@ -10,6 +10,7 @@ class Chaser(Rect):
         self.speed = speed
 
     def update(self, dt):
+        super().update(dt)
         x, y = self.get_position()
         dir_vec = [0, 0]
         if x != self.player.x:

@@ -1,6 +1,5 @@
 from enemies.rect import Rect
 
-
 class Popper(Rect):
     def __init__(self, position: tuple[float, float], max_size: float, time: float):
         super().__init__(position, (0, 0), time)
@@ -9,15 +8,16 @@ class Popper(Rect):
 
     def update(self, dt):
         super().update(dt)
-        elapsed = self.time - self.timer
-        progress = elapsed / self.time
-        progress_rel = (progress % 0.5) * 2
-        progress_rel_inv = 1 - progress_rel
+        # Calculate progress from 0 to 1
+        progress = self.timer / self.time
+        
+        # Create smooth grow/shrink cycle
         if progress < 0.5:
-            self.set_size((progress_rel * self.max_size, progress_rel * self.max_size))
+            # Growing phase: 0 to 1
+            scale = progress * 2
         else:
-            self.set_size((progress_rel_inv * self.max_size, progress_rel_inv * self.max_size))
-
-
-
-
+            # Shrinking phase: 1 to 0
+            scale = 2 * (1 - progress)
+        
+        current_size = self.max_size * scale
+        self.set_size((current_size, current_size))
