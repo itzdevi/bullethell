@@ -1,20 +1,20 @@
 import pygame
 from constants import *
+from enemies.chaser import Chaser
+from enemies.popper import Popper
 from graphics import Graphics
 from player import Player
-from spawner import Spawner
 
 
 class Game:
     def __init__(self):
         self.graphics = Graphics()
         self.player = Player()
-        self.spawner = Spawner()
 
     def start(self):
         clock = pygame.time.Clock()
         should_run = True
-        self.spawner.spawn_vertical(0.4, 1)
+        chaser = Chaser((0, 100), 50, 20, 100, self.player)
         while should_run:
             dt = clock.tick(FRAMERATE) / 1000
             for event in pygame.event.get():
@@ -22,12 +22,12 @@ class Game:
                     should_run = False
         
             self.player.update(dt)
-            self.spawner.update(dt)
-            self.apply_collisions()
+            chaser.update(dt)
+            # self.apply_collisions()
 
             self.graphics.clear()
             self.player.draw(self.graphics)
-            self.spawner.draw(self.graphics)
+            chaser.draw(self.graphics)
             self.graphics.flip()
 
     def apply_collisions(self):
