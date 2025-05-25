@@ -1,4 +1,5 @@
+from agent import KeyboardAgent
 from game import Game
 
 
-Game().start()
+Game(KeyboardAgent()).start()
