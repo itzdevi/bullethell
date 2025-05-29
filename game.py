@@ -15,14 +15,12 @@ class Game:
         clock = pygame.time.Clock()
         should_run = True
         while should_run:
-            dt = clock.tick(FRAMERATE) / 1000
+            dt = clock.tick(FRAMERATE) / 1000 * 1
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     should_run = False
 
             self.environment.update(dt)
-
-            # self.apply_collisions()
 
             self.graphics.clear()
             self.environment.draw(self.graphics)

@@ -7,7 +7,7 @@ from obj import Obj
 
 MOVE_SPEED = 400
 SIZE = 30, 30
-COLOR = 0, 0, 255
+COLOR = 0, 0, 255, 1
 
 class Player(Obj):
     def __init__(self):

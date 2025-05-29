@@ -8,7 +8,7 @@ class Obj:
         self.y: int = 0
         self.width: int = 0
         self.height: int = 0
-        self.color: tuple[int, int, int] = 0, 0, 0
+        self.color: tuple[int, int, int, int] = 0, 0, 0, 1
 
     def set_position(self, position: tuple[int, int]):
         self.x, self.y = position
@@ -22,7 +22,7 @@ class Obj:
     def get_size(self):
         return self.width, self.height
     
-    def set_color(self, color: tuple[int, int, int]):
+    def set_color(self, color: tuple[int, int, int, int]):
         self.color = color
 
     def get_color(self):
